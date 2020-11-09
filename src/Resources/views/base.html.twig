@@ -7,7 +7,7 @@
             {% block css %}
                 {% for file in css %}
                     <link
-                            href="{{ asset("#file") }}"
+                            href="{{ asset(file) }}"
                             rel="stylesheet"
                     />
                 {% endfor %}
@@ -25,7 +25,7 @@
                 {% for file in js %}
                     <script
                             defer
-                            src="{{ asset("#file") }}"
+                            src="{{ asset(file) }}"
                     ></script>
                 {% endfor %}
             {% endblock js %}
@@ -50,7 +50,9 @@
             {% block app %}
                 <main
                         id="{{ appId }}"
-                ></main>
+                >
+                    Target "#{{ appId }}" element to start your app
+                </main>
             {% endblock app %}
         </body>
     {% endblock body %}
