@@ -3,28 +3,14 @@ services:
         autowire: true
         autoconfigure: true
     
-    home.home:
-        class: 'Jalismrs\HomeBundle\Home'
+    jalismrs_home.home_controller:
         arguments:
-            $rateLimitProvider: '@Maba\GentleForce\RateLimitProvider'
-            $throttler: '@Maba\GentleForce\ThrottlerInterface'
-    
-    Jalismrs\HomeBundle\Home: '@home.home'
-    
-    # maba/gentle-force
-    Maba\GentleForce\RateLimitProvider:
-        autowire: true
-    Maba\GentleForce\Throttler:
-        arguments:
-            $client: '@Predis\Client'
-            $rateLimitProvider: '@Maba\GentleForce\RateLimitProvider'
-            $prefix: 'rate_limit::'
-    Maba\GentleForce\ThrottlerInterface: '@Maba\GentleForce\Throttler'
-    
-    # predis/predis
-    Predis\Client:
-        arguments:
-            $parameters:
-                host: '%env(REDIS_HOST)%'
-            $options:
-                prefix: '%app.name%::'
+            $appId: '%jalismrs_home.app_id%'
+            $css: '%jalismrs_home.css%'
+            $js: '%jalismrs_home.js%'
+        calls:
+            - setContainer:
+                $container: '@Psr\Container\ContainerInterface'
+        class: 'Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller\HomeController'
+        tags:
+            - 'controller.service_arguments'

@@ -1,0 +1,57 @@
+<!doctype html>
+<html
+        lang="fr"
+>
+    {% block head %}
+        <head>
+            {% block css %}
+                {% for file in css %}
+                    <link
+                            href="{{ asset("#file") }}"
+                            rel="stylesheet"
+                    />
+                {% endfor %}
+            {% endblock css %}
+            
+            {% block favicon %}
+                <link
+                        href="/favicon.png"
+                        rel="icon"
+                        type="image/png"
+                >
+            {% endblock favicon %}
+            
+            {% block js %}
+                {% for file in js %}
+                    <script
+                            defer
+                            src="{{ asset("#file") }}"
+                    ></script>
+                {% endfor %}
+            {% endblock js %}
+    
+            {% block meta %}
+                <meta
+                        charset="UTF-8"
+                />
+                <meta
+                        content="width=device-width, initial-scale=1"
+                        name="viewport"
+                />
+            {% endblock meta %}
+    
+            {% block title %}
+                <title>App</title>
+            {% endblock title %}
+        </head>
+    {% endblock head %}
+    {% block body %}
+        <body>
+            {% block app %}
+                <main
+                        id="{{ appId }}"
+                ></main>
+            {% endblock app %}
+        </body>
+    {% endblock body %}
+</html>
