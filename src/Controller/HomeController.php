@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class HomeController extends AbstractController
 {
-    public const VIEW = 'JalismrsHomeBundle::main.html.twig';
+    public const VIEW = '@JalismrsHome/main.html.twig';
     
     /**
      * appId
