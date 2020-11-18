@@ -6,12 +6,18 @@ services:
     # controllers
     jalismrs_home.controller.home_controller:
         arguments:
-            $main: '%jalismrs_home.main%'
-            $css: '%jalismrs_home.css%'
-            $js: '%jalismrs_home.js%'
+            $controllerService: '@jalismrs_home.controller_service.home_controller_service'
         calls:
             - setContainer:
                 $container: '@Psr\Container\ContainerInterface'
         class: 'Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller\HomeController'
         tags:
             - 'controller.service_arguments'
+    
+    # controller-services
+    jalismrs_home.controller_service.home_controller_service:
+        arguments:
+            $main: '%jalismrs_home.main%'
+            $css: '%jalismrs_home.css%'
+            $js: '%jalismrs_home.js%'
+        class: 'Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService\HomeControllerService'

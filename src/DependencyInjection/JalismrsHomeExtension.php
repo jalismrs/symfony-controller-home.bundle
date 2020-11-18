@@ -39,19 +39,15 @@ class JalismrsHomeExtension extends
         );
         $yamlFileLoader->load('services.yaml');
     
-        $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.home_controller');
+        $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.controller_service.home_controller_service');
         $definition->replaceArgument(
             '$main',
             $mergedConfig['main']
         );
-    
-        $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.home_controller');
         $definition->replaceArgument(
             '$css',
             $mergedConfig['css']
         );
-    
-        $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.home_controller');
         $definition->replaceArgument(
             '$js',
             $mergedConfig['js']

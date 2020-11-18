@@ -16,41 +16,23 @@ class HomeController extends AbstractController
     public const VIEW = '@JalismrsHome/main.html.twig';
     
     /**
-     * main
+     * controllerService
      *
-     * @var array
+     * @var \Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller\HomeControllerService
      */
-    private array $main;
-    /**
-     * css
-     *
-     * @var array
-     */
-    private array $css;
-    /**
-     * js
-     *
-     * @var array
-     */
-    private array $js;
+    private HomeControllerService $controllerService;
     
     /**
      * HomeController constructor.
      *
-     * @param array $main
-     * @param array $css
-     * @param array $js
+     * @param \Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller\HomeControllerService $controllerService
      *
      * @codeCoverageIgnore
      */
     public function __construct(
-        array $main,
-        array $css,
-        array $js
+        HomeControllerService $controllerService
     ) {
-        $this->main = $main;
-        $this->css = $css;
-        $this->js = $js;
+        $this->controllerService = $controllerService;
     }
     
     /**
@@ -61,11 +43,7 @@ class HomeController extends AbstractController
     public function index() : Response {
         return $this->render(
             self::VIEW,
-            [
-                'main' => $this->main,
-                'css'  => $this->css,
-                'js'   => $this->js,
-            ],
+            $this->controllerService->index(),
         );
     }
 }
