@@ -4,7 +4,7 @@ services:
         autoconfigure: true
 
     # controllers
-    jalismrs_home.home_controller:
+    jalismrs_home.controller.home_controller:
         arguments:
             $main: '%jalismrs_home.main%'
             $css: '%jalismrs_home.css%'

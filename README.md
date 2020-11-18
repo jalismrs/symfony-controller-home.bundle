@@ -22,7 +22,7 @@ jalismrs_home:
 ```yaml
 # config/routes.yaml
 _index:
-    controller: 'jalismrs_home.home_controller::index'
+    controller: 'jalismrs_home.controller.home_controller::index'
     path: '/{catchAll}'
     requirements:
         catchAll: "^.*$"
