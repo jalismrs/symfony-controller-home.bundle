@@ -16,11 +16,11 @@ class HomeController extends AbstractController
     public const VIEW = '@JalismrsHome/main.html.twig';
     
     /**
-     * appId
+     * main
      *
-     * @var string
+     * @var array
      */
-    private string $appId;
+    private array $main;
     /**
      * css
      *
@@ -37,18 +37,18 @@ class HomeController extends AbstractController
     /**
      * HomeController constructor.
      *
-     * @param string $appId
-     * @param array  $css
-     * @param array  $js
+     * @param array $main
+     * @param array $css
+     * @param array $js
      *
      * @codeCoverageIgnore
      */
     public function __construct(
-        string $appId,
+        array $main,
         array $css,
         array $js
     ) {
-        $this->appId = $appId;
+        $this->main = $main;
         $this->css = $css;
         $this->js = $js;
     }
@@ -62,9 +62,9 @@ class HomeController extends AbstractController
         return $this->render(
             self::VIEW,
             [
-                'appId' => $this->appId,
-                'css' => $this->css,
-                'js' => $this->js,
+                'main' => $this->main,
+                'css'  => $this->css,
+                'js'   => $this->js,
             ],
         );
     }

@@ -71,7 +71,7 @@ final class HomeControllerTest extends
                 self::equalTo(HomeController::VIEW),
                 self::logicalAnd(
                     self::isType('array'),
-                    self::arrayHasKey('appId'),
+                    self::arrayHasKey('main'),
                     self::arrayHasKey('css'),
                     self::arrayHasKey('js'),
                 ),
@@ -97,7 +97,9 @@ final class HomeControllerTest extends
     {
         // arrange
         $globalsController = new HomeController(
-            'appId',
+            [
+                'id' => 'app',
+            ],
             [],
             [],
         );

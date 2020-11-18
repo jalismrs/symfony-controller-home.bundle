@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 /**
- * Class JalismrsGlobalsExtension
+ * Class JalismrsHomeExtension
  *
  * @package Jalismrs\Symfony\Bundle\JalismrsHomeBundle\DependencyInjection
  */
@@ -41,8 +41,8 @@ class JalismrsHomeExtension extends
     
         $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.home_controller');
         $definition->replaceArgument(
-            '$appId',
-            $mergedConfig['app_id']
+            '$main',
+            $mergedConfig['main']
         );
     
         $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.home_controller');

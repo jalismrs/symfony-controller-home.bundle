@@ -2,10 +2,11 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-    
+
+    # controllers
     jalismrs_home.home_controller:
         arguments:
-            $appId: '%jalismrs_home.app_id%'
+            $main: '%jalismrs_home.main%'
             $css: '%jalismrs_home.css%'
             $js: '%jalismrs_home.js%'
         calls:

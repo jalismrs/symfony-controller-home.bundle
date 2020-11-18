@@ -36,9 +36,13 @@ class Configuration implements
                     ->end()
                     ->defaultValue([])
                 ->end()
-                ->scalarNode('app_id')
-                    ->cannotBeEmpty()
-                    ->defaultValue('app')
+                ->arrayNode('main')
+                    ->children()
+                        ->scalarNode('id')
+                            ->cannotBeEmpty()
+                            ->defaultValue('app')
+                        ->end()
+                    ->end()
                 ->end()
             ->end();
         // @formatter:on
