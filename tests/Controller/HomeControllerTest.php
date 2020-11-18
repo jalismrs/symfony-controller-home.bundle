@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Tests\Controller;
 
 use Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller\HomeController;
+use Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService\HomeControllerService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -25,6 +26,12 @@ final class HomeControllerTest extends
      * @var \PHPUnit\Framework\MockObject\MockObject|\Psr\Container\ContainerInterface
      */
     private MockObject $mockContainer;
+    /**
+     * mockControllerService
+     *
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService\HomeControllerService
+     */
+    private MockObject $mockControllerService;
     /**
      * mockTwig
      *
@@ -48,6 +55,7 @@ final class HomeControllerTest extends
         $systemUnderTest = $this->createSUT();
         
         $content = 'content';
+        $parameters = [];
         
         // expect
         $this->mockContainer
@@ -64,17 +72,16 @@ final class HomeControllerTest extends
                 self::equalTo('twig'),
             )
             ->willReturn(true);
+        $this->mockControllerService
+            ->expects(self::once())
+            ->method('index')
+            ->willReturn($parameters);
         $this->mockTwig
             ->expects(self::once())
             ->method('render')
             ->with(
                 self::equalTo(HomeController::VIEW),
-                self::logicalAnd(
-                    self::isType('array'),
-                    self::arrayHasKey('main'),
-                    self::arrayHasKey('css'),
-                    self::arrayHasKey('js'),
-                ),
+                self::equalTo($parameters),
             )
             ->willReturn($content);
         
@@ -97,11 +104,7 @@ final class HomeControllerTest extends
     {
         // arrange
         $globalsController = new HomeController(
-            [
-                'id' => 'app',
-            ],
-            [],
-            [],
+            $this->mockControllerService
         );
         
         // act
@@ -110,11 +113,17 @@ final class HomeControllerTest extends
         return $globalsController;
     }
     
+    /**
+     * setUp
+     *
+     * @return void
+     */
     protected function setUp() : void
     {
         parent::setUp();
         
         $this->mockContainer = $this->createMock(ContainerInterface::class);
+        $this->mockControllerService = $this->createMock(HomeControllerService::class);
         $this->mockTwig      = $this->createMock(Environment::class);
     }
 }

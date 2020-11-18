@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller;
+namespace Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService;
 
 use function array_unique;
 use function array_values;

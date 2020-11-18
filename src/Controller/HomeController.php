@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller;
 
+use Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService\HomeControllerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,14 +19,14 @@ class HomeController extends AbstractController
     /**
      * controllerService
      *
-     * @var \Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller\HomeControllerService
+     * @var \Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService\HomeControllerService
      */
     private HomeControllerService $controllerService;
     
     /**
      * HomeController constructor.
      *
-     * @param \Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller\HomeControllerService $controllerService
+     * @param \Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService\HomeControllerService $controllerService
      *
      * @codeCoverageIgnore
      */
@@ -41,9 +42,11 @@ class HomeController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index() : Response {
+        $parameters = $this->controllerService->index();
+        
         return $this->render(
             self::VIEW,
-            $this->controllerService->index(),
+            $parameters,
         );
     }
 }
