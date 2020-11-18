@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Jalismrs\Symfony\Bundle\JalismrsHomeBundle\Controller;
 
+use Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService\HomeControllerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,41 +17,23 @@ class HomeController extends AbstractController
     public const VIEW = '@JalismrsHome/main.html.twig';
     
     /**
-     * appId
+     * controllerService
      *
-     * @var string
+     * @var \Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService\HomeControllerService
      */
-    private string $appId;
-    /**
-     * css
-     *
-     * @var array
-     */
-    private array $css;
-    /**
-     * js
-     *
-     * @var array
-     */
-    private array $js;
+    private HomeControllerService $controllerService;
     
     /**
      * HomeController constructor.
      *
-     * @param string $appId
-     * @param array  $css
-     * @param array  $js
+     * @param \Jalismrs\Symfony\Bundle\JalismrsHomeBundle\ControllerService\HomeControllerService $controllerService
      *
      * @codeCoverageIgnore
      */
     public function __construct(
-        string $appId,
-        array $css,
-        array $js
+        HomeControllerService $controllerService
     ) {
-        $this->appId = $appId;
-        $this->css = $css;
-        $this->js = $js;
+        $this->controllerService = $controllerService;
     }
     
     /**
@@ -59,13 +42,11 @@ class HomeController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index() : Response {
+        $parameters = $this->controllerService->index();
+        
         return $this->render(
             self::VIEW,
-            [
-                'appId' => $this->appId,
-                'css' => $this->css,
-                'js' => $this->js,
-            ],
+            $parameters,
         );
     }
 }

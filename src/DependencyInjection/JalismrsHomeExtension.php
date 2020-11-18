@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 /**
- * Class JalismrsGlobalsExtension
+ * Class JalismrsHomeExtension
  *
  * @package Jalismrs\Symfony\Bundle\JalismrsHomeBundle\DependencyInjection
  */
@@ -39,19 +39,15 @@ class JalismrsHomeExtension extends
         );
         $yamlFileLoader->load('services.yaml');
     
-        $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.home_controller');
+        $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.controller_service.home_controller_service');
         $definition->replaceArgument(
-            '$appId',
-            $mergedConfig['app_id']
+            '$main',
+            $mergedConfig['main']
         );
-    
-        $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.home_controller');
         $definition->replaceArgument(
             '$css',
             $mergedConfig['css']
         );
-    
-        $definition = $container->getDefinition(Configuration::CONFIG_ROOT . '.home_controller');
         $definition->replaceArgument(
             '$js',
             $mergedConfig['js']
